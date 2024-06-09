@@ -9,7 +9,14 @@ export default {
     "./error.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'sans': ['Roboto', 'sans-serif'],
+      },
+      dropShadow:{
+        'font':'1px 1px 5px #a8a8a8',
+      }
+    },
   },
   plugins: [],
 }
