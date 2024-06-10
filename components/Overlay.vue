@@ -36,3 +36,5 @@
    @apply rounded-md bg-clip-padding backdrop-filter backdrop-blur-md border border-gray-50/40 bg-cyan-600/10 p-5
 }
 </style>
+
+
