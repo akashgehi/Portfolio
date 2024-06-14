@@ -4,7 +4,6 @@ template>
 
 <script setup>
 import { reactive, computed, ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
 
 const { $gsap: gsap, $Draggable: Draggable } = useNuxtApp();
 const router = useRouter()

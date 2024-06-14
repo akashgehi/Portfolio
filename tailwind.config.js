@@ -14,7 +14,7 @@ export default {
         'sans': ['Roboto', 'sans-serif'],
       },
       dropShadow:{
-        'font':'1px 1px 5px #a8a8a8',
+        'font':'.5px .5px 4px #a8a8a8',
       }
     },
   },
