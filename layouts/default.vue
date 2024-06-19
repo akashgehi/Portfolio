@@ -1,7 +1,11 @@
 <!-- layouts/default.vue -->
 <template>
     <div class="layout">
-        <div class="bg-gradient-to-bl from-gray-950  to-gray-700 h-screen text-white">
+        <video autoplay muted loop  id="myVideo" class="fixed object-cover h-screen w-screen">
+  <source src="/public/bg-video-7.mp4" type="video/mp4">
+</video>
+        <div class="h-screen text-white">
+            
           <NuxtPage />
         <!-- </div> -->
     </div>
@@ -30,26 +34,10 @@ const displayComputed = computed(() => {
   
   <style scoped>
   .layout {
-    position: relative;
+    /* position: relative; */
     min-height: 100vh;
     overflow: hidden;
   }
-  .background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('~/assets/background.jpg'); /* Replace with your background image */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    z-index: -1; /* Ensure the background is behind the content */
-  }
-  .content {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-  }
+  
   </style>
   
