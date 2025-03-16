@@ -1,5 +1,5 @@
 <template>
-    <div class="relative default-layout flex flex-col items-center justify-center h-[100vh] w-full overflow-hidden p-4 md:p-6 lg:p-8 xl:p-12">
+    <div class="relative default-layout flex flex-col items-center justify-center h-[100dvh] w-full overflow-hidden p-4 md:p-6 lg:p-8 xl:p-12">
         <!-- Background Video -->
         <video autoplay muted loop id="myVideo" class="fixed object-cover w-full h-full">
             <source src="/public/video-bg-4.mp4" type="video/mp4">
@@ -12,7 +12,7 @@
                 ref="navbar" 
                 v-if="route.path !== '/'" 
                 class="flex-shrink-0 pb-4 md:pb-6 lg:pb-8"
-                :class="{ 'h-[10vh] md:h-[12vh] lg:h-[14vh]' : route.path !== '/' }"
+                :class="{ 'h-[10dvh] md:h-[12dvh] lg:h-[14dvh]' : route.path !== '/' }"
             />
 
             <!-- Main Content (Takes Remaining Space) -->
