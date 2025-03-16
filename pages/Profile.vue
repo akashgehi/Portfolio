@@ -96,15 +96,6 @@ label {
     @apply drop-shadow-font
 }
 
-h1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-    text-align: center;
-}
-
 /* Overlay transition */
 .overlay-enter-active,
 .overlay-leave-active {

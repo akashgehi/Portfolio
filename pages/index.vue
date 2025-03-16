@@ -1,9 +1,9 @@
 <template>
-    <div class="main-tile bg-black grid md:grid-cols-12 md:gap-1 text-white">
-        <span class="tiles-div col-span-12 border border-black gap-1 md:gap-2
-        grid grid-cols-12  h-screen p-2 md:p-6">
+    <div class="main-tile h-full grid md:grid-cols-12 md:gap-1 text-white">
+        <span class="tiles-div col-span-12  gap-1 md:gap-2
+        grid grid-cols-12  p-2 md:p-6">
             <HomepageTile class="HomepageTile col-span-12 md:col-span-8 md:row-span-4">
-                <div @click="router.push('/resume')" class="grid gap-2 items-center grid-cols-12">
+                <div @click="router.push('/about')" class="grid gap-2 items-center grid-cols-12">
                     <span class=" col-span-7 md:col-span-8">
                         <h2 class="  text-2xl md:text-4xl drop-shadow-font">Hello! <br> I'm<strong> Akash Gehi</strong>
                         </h2>
@@ -63,6 +63,10 @@ const router = useRouter()
 const isOverlayVisible = ref(false)
 const overlayContent = ref('')
 
+// definePageMeta({
+//     layout: 'home'
+// })
+
 function openOverlay(content) {
     router.push({ name: '/' + content })
 
@@ -83,7 +87,7 @@ let tl = ref(null)
 
 onBeforeRouteLeave((to, from, next) => {
     tl = gsap.timeline(); //create the timeline
-
+console.log('leave')
 
     const tiles = document.querySelectorAll('.HomepageTile')
 
@@ -110,8 +114,7 @@ onMounted(() => {
 
 
     const tiles = document.querySelectorAll('.HomepageTile')
-
-    enterAnimation(tiles)
+    enterAnimation(tiles,function(index){return index == 1 ? 1 : 0.1},'power3.in', false)
 
     // gsap.set(tiles, { display: 'none' }) // Set initial visibility to hidden
 
@@ -152,11 +155,11 @@ label {
 }
 
 .secondary-tile h2 {
-    @apply text-lg md:text-xl xl:text-2xl tracking-tighter font-extralight shadow-white drop-shadow-font font-mono
+    @apply text-base md:text-xl xl:text-2xl tracking-tighter font-normal
 }
 
 .secondary-tile p {
-    @apply text-lg md:text-2xl xl:text-2xl ml-auto flex-wrap text-right
+    @apply text-base md:text-2xl xl:text-2xl ml-auto flex-wrap text-right
 }
 
 .glass-tile h1,
@@ -193,4 +196,5 @@ label {
         /* gap: 1.5rem; */
     }
 }
+
 </style>
