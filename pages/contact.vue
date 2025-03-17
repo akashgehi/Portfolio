@@ -1,92 +1,70 @@
 <template>
-    <div class="min-h-screen flex flex-col justify-center items-center px-6 text-white">
-      <!-- Title -->
-      <div class="text-center">
-        <h1 class="text-4xl md:text-6xl font-light leading-tight">
-          Let's <b class="font-semibold">Connect</b> & <b class="font-semibold">Collaborate</b>
-        </h1>
-      </div>
+    <div class="flex flex-col items-center justify-center  bg-transparent">
+      <h1 class="text-2xl font-light text-center text-white mb-5">
+        Let's <b class="font-bold">Connect</b> & <b class="font-bold">Collaborate</b>
+      </h1>
   
-      <!-- Main Section -->
-      <div class="mt-12 w-full max-w-5xl flex flex-col md:flex-row items-start gap-12">
-        <!-- Contact Form -->
-        <div class="glass flex-1 p-8 rounded-2xl shadow-lg w-full">
-          <h2 class="text-2xl font-semibold">Send a Message</h2>
-          <form name="contact" method="POST" data-netlify="true" class="mt-6 flex flex-col gap-4">
-            <input type="hidden" name="form-name" value="contact" />
-            <input type="text" name="name" placeholder="Your Name" class="input" required />
-            <input type="email" name="email" placeholder="Your Email" class="input" required />
-            <textarea name="message" placeholder="Your Message" class="input h-32" required></textarea>
-            <button type="submit" class="btn">Send</button>
-          </form>
+      <div class="w-full max-w-sm bg-white/10 backdrop-blur-md rounded-lg p-5 border border-white/20">
+        <!-- Chat UI -->
+        <div class="flex flex-col gap-3 p-3" role="region" aria-label="Chat conversation" aria-live="polite">
+          <div v-for="(msg, index) in messages" :key="index" class="w-fit px-3 py-2 rounded-lg text-white" 
+               :class="msg.type === 'bot' ? 'bg-white/30 self-start' : 'bg-green-500/30 self-end'">
+            <p>{{ msg.text }}</p>
+          </div>
         </div>
   
-        <!-- Contact Info -->
-        <div class="flex flex-col gap-6 w-full md:max-w-sm">
-          <div>
-            <h2 class="text-2xl font-semibold">Email</h2>
-            <a href="mailto:theakashgehi@gmail.com" class="text-link">theakashgehi@gmail.com</a>
-          </div>
-          <div>
-            <h2 class="text-2xl font-semibold">GitHub</h2>
-            <a href="https://github.com/akashgehi" class="text-link">github.com/akashgehi</a>
-          </div>
-          <div>
-            <h2 class="text-2xl font-semibold">Location</h2>
-            <p class="text-gray-300">Pune, India</p>
-          </div>
+        <!-- Input Box -->
+        <div class="flex gap-2 pt-3">
+          <label for="message-input" class="sr-only">Type your message</label>
+          <input
+            id="message-input"
+            v-model="userMessage"
+            type="text"
+            placeholder="Type your message..."
+            class="flex-1 px-4 py-2 rounded-lg bg-white/40 text-white outline-none focus:bg-white/60"
+            @keyup.enter="sendMessage"
+          />
+          <button @click="sendMessage" aria-label="Send message" class="px-4 py-2 bg-green-500/70 text-white rounded-lg">
+            ➤
+          </button>
         </div>
+  
+        <!-- Quick Contact Options -->
+        <nav class="flex justify-center gap-4 mt-4" aria-label="Social media links">
+          <a v-for="(icon, index) in socialLinks" :key="index" :href="icon.href" target="_blank" rel="noopener" :aria-label="icon.label">
+            <img :src="'../'+icon.src" class="w-10 h-10 transition-transform hover:scale-110" :alt="icon.label" />
+          </a>
+        </nav>
       </div>
     </div>
   </template>
   
-  <style scoped>
-  .glass {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-  }
+  <script setup>
+  import { ref } from "vue";
   
-  .input {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.12);
-    color: white;
-    outline: none;
-    transition: 0.3s;
-  }
+  const messages = ref([
+    { text: "Hey there! 👋", type: "bot" },
+    { text: "Have an idea? Let's bring it to life! 🚀", type: "bot" },
+    { text: "Drop a message, or use the links below! 😊", type: "bot" },
+  ]);
   
-  .input:focus {
-    background: rgba(255, 255, 255, 0.18);
-  }
+  const userMessage = ref("");
   
-  .input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-  }
+  const sendMessage = () => {
+    if (userMessage.value.trim() !== "") {
+      messages.value.push({ text: userMessage.value, type: "user" });
+      userMessage.value = "";
+      setTimeout(() => {
+        messages.value.push({ text: "Got it! I\'ll get back to you soon. 🚀", type: "bot" });
+      }, 1000);
+    }
+  };
   
-  .btn {
-    background: linear-gradient(90deg, #5a67d8, #7f9cf5);
-    padding: 14px;
-    text-align: center;
-    border-radius: 10px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-  }
-  
-  .btn:hover {
-    filter: brightness(1.1);
-  }
-  
-  .text-link {
-    color: #5ab4ff;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-  
-  .text-link:hover {
-    text-decoration: underline;
-  }
-  </style>
+  const socialLinks = ref([
+    { href: "https://github.com/akashgehi", src: "icons8-github.svg", label: "GitHub" },
+    { href: "https://linkedin.com/in/akashgehi", src: "icons8-linkedin.svg", label: "LinkedIn" },
+    { href: "https://instagram.com", src: "icons8-instagram.svg", label: "Instagram" },
+    { href: "mailto:theakashgehi@gmail.com", src: "icons8-gmail.svg", label: "Gmail" },
+  ]);
+  </script>
   

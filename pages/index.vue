@@ -1,23 +1,23 @@
 <template>
-    <div class="main-tile h-full grid md:grid-cols-12 md:gap-1 text-white">
-        <span class="tiles-div col-span-12  gap-1 md:gap-2
-        grid grid-cols-12  p-2 md:p-6">
-            <HomepageTile class="HomepageTile col-span-12 md:col-span-8 md:row-span-4">
+    <div class="main-tile h-full grid lg:grid-cols-12 lg:gap-1 text-white">
+        <span class="tiles-div col-span-12  gap-1 lg:gap-2
+        grid grid-cols-12  p-2 lg:p-6">
+            <HomepageTile class="HomepageTile col-span-12 lg:col-span-8 lg:row-span-4">
                 <div @click="router.push('/about')" class="grid gap-2 items-center grid-cols-12">
-                    <span class=" col-span-7 md:col-span-8">
-                        <h2 class="  text-2xl md:text-4xl drop-shadow-font">Hello! <br> I'm<strong> Akash Gehi</strong>
+                    <span class=" col-span-7 lg:col-span-8">
+                        <h2 class="  text-2xl lg:text-4xl drop-shadow-font">Hello! <br> I'm<strong> Akash Gehi</strong>
                         </h2>
                         <!-- </span> -->
-                        <h3 class=" text-3xl md:text-5xl font-medium">Frontend Developer</h3>
-                        <p class="mt-3">I build things for the Web</p>
+                        <h3 class=" text-3xl lg:text-5xl font-medium">Frontend Developer</h3>
+                        <p class="mt-3 text-base md:text-lg xl:text-2xl">I build things for the Web</p>
                     </span>
                     <div
-                        class="col-span-5 rounded-full bg-gradient-to-t from- md:col-span-4 overflow-clip   shadow-sm ">
+                        class="col-span-5 rounded-full bg-gradient-to-t from- lg:col-span-4 overflow-clip   shadow-sm ">
                         <img src="../public/file-1.png" class="shadow-md my-auto aspect-auto " alt="Akash Gehi" />
                     </div>
                 </div>
             </HomepageTile>
-            <HomepageTile class="HomepageTile col-span-7 md:col-span-4 md:row-span-1 ">
+            <HomepageTile class="HomepageTile col-span-7 lg:col-span-4 lg:row-span-1 ">
                 <div class="secondary-tile">
 
                     <h2>Socials</h2>
@@ -28,23 +28,23 @@
                     </p>
                 </div>
             </HomepageTile>
-            <HomepageTile class="HomepageTile col-span-5 md:col-span-4 md:row-span-3 secondary-tile">
+            <HomepageTile class="HomepageTile col-span-5 lg:col-span-4 lg:row-span-3 secondary-tile">
                 <h2>Resume</h2>
                 <p>Professional Experience and Skills</p>
             </HomepageTile>
-            <HomepageTile class="HomepageTile col-span-12 md:col-span-3 md:row-span-3 secondary-tile">
+            <HomepageTile class="HomepageTile col-span-12 lg:col-span-3 lg:row-span-3 secondary-tile">
                 <h2>About</h2>
                 <p>My Story and Passions</p>
             </HomepageTile>
-            <HomepageTile class="HomepageTile col-span-12 md:col-span-3 md:row-span-3 secondary-tile">
+            <HomepageTile class="HomepageTile col-span-12 lg:col-span-3 lg:row-span-3 secondary-tile">
                 <h2>Work</h2>
                 <p>Professional Milestones</p>
             </HomepageTile>
-            <HomepageTile class="HomepageTile col-span-6 md:col-span-3 md:row-span-3 secondary-tile">
+            <HomepageTile class="HomepageTile col-span-6 lg:col-span-3 lg:row-span-3 secondary-tile">
                 <h2>Website</h2>
                 <p>About this Website</p>
             </HomepageTile>
-            <HomepageTile class="HomepageTile col-span-6 md:col-span-3 md:row-span-3 secondary-tile">
+            <HomepageTile class="HomepageTile col-span-6 lg:col-span-3 lg:row-span-3 secondary-tile">
                 <h2>Contact</h2>
                 <p>Let's connect and collaborate</p>
             </HomepageTile>

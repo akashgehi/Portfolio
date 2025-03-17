@@ -17,10 +17,10 @@
 
             <!-- Main Content (Takes Remaining Space) -->
             <div 
-                class="w-full lg:h- flex-grow rounded-[10px] md:rounded-[20px] vr-frame flex  justify-center overflow-scroll scroll"
+                class="w-full lg:h-full lg:!max-h-[1200px] flex-grow rounded-[10px] md:rounded-[20px] vr-frame flex  justify-center overflow-auto scroll"
                 :class="{ 'glass-vr-bg': route.path !== '/' }"
             >
-                <div ref="windowRef" class="relative w-full h-fit flex items-center justify-center">
+                <div ref="windowRef" class="relative w-full h-full flex items-center justify-center">
                     <NuxtPage class="vr-content w-full h-full" />
                 </div>
             </div>
@@ -92,6 +92,36 @@ watch(route, () => {
 
 .scroll::-webkit-scrollbar {
     display: none; /* Hide scrollbars */
+}
+
+/* Apply to the entire document */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1); /* Light frosted background */
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3); /* Glassmorphic effect */
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5); /* Brighter on hover */
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
 }
 
 video#myVideo {
