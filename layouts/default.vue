@@ -2,7 +2,7 @@
     <div class="relative default-layout flex flex-col items-center justify-center h-[100dvh] w-full overflow-hidden p-4 md:p-6 lg:p-8 xl:p-12">
         <!-- Background Video -->
         <video autoplay muted loop id="myVideo" class="fixed object-cover w-full h-full">
-            <source src="/public/video-bg-4.mp4" type="video/mp4">
+            <source src="https://videos.pexels.com/video-files/6444411/6444411-uhd_2560_1440_30fps.mp4" type="video/mp4">
         </video>
 
         <!-- Main Wrapper (No Scroll) -->

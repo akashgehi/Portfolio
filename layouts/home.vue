@@ -2,7 +2,7 @@
 <template>
     <div class="layout md:flex md:items-center md:justify-center h-screen ">
         <video autoplay muted loop  id="myVideo" class="fixed object-cover h-screen w-screen">
-  <source src="../public/video-bg-4.mp4" type="video/mp4">
+  <source src="https://videos.pexels.com/video-files/6444411/6444411-uhd_2560_1440_30fps.mp4" type="video/mp4">
 </video>
 
         <div class="md:size-[80%] vr-frame  text-white">
