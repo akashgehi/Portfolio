@@ -10,7 +10,7 @@
         :key="link.name" 
         @click="router.push(link.path)" 
         @keydown.enter="router.push(link.path)" 
-        class="glass-3 cursor-pointer hover:scale-[1.18] hover:pb-3 transition-all p-6 group/nav-item flex flex-col items-center rounded-[50%] size-[60px] md:size-[84px]" 
+        class="glass-3 cursor-pointer hover:scale-[1.18] hover:pb-3 transition-all p-6 group/nav-item flex flex-col items-center rounded-lg size-[60px] md:size-[84px]" 
         :aria-current="route.path === link.path ? 'page' : null"
         tabindex="0"
         role="menuitem"

@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </HomepageTile>
-            <HomepageTile class="HomepageTile col-span-7 lg:col-span-4 lg:row-span-1 ">
+            <HomepageTile class="HomepageTile col-span-7 lg:col-span-4 lg:row-span-1 pointer-events-auto">
                 <div class="secondary-tile">
 
                     <h2>Socials</h2>
@@ -28,23 +28,23 @@
                     </p>
                 </div>
             </HomepageTile>
-            <HomepageTile class="HomepageTile col-span-5 lg:col-span-4 lg:row-span-3 secondary-tile">
+            <HomepageTile @click="router.push('/resume')" class="HomepageTile col-span-5 lg:col-span-4 lg:row-span-3 secondary-tile">
                 <h2>Resume</h2>
                 <p>Professional Experience and Skills</p>
             </HomepageTile>
-            <HomepageTile class="HomepageTile col-span-12 lg:col-span-3 lg:row-span-3 secondary-tile">
+            <HomepageTile @click="router.push('/about')" class="HomepageTile col-span-12 lg:col-span-3 lg:row-span-3 secondary-tile">
                 <h2>About</h2>
                 <p>My Story and Passions</p>
             </HomepageTile>
-            <HomepageTile class="HomepageTile col-span-12 lg:col-span-3 lg:row-span-3 secondary-tile">
-                <h2>Work</h2>
-                <p>Professional Milestones</p>
+            <HomepageTile @click="router.push('/work')" class="HomepageTile col-span-12 lg:col-span-3 lg:row-span-3 secondary-tile">
+                <h2>Projects</h2>
+                <p>Work Showcase</p>
             </HomepageTile>
-            <HomepageTile class="HomepageTile col-span-6 lg:col-span-3 lg:row-span-3 secondary-tile">
+            <HomepageTile @click="router.push('/website')" class="HomepageTile col-span-6 lg:col-span-3 lg:row-span-3 secondary-tile">
                 <h2>Website</h2>
                 <p>About this Website</p>
             </HomepageTile>
-            <HomepageTile class="HomepageTile col-span-6 lg:col-span-3 lg:row-span-3 secondary-tile">
+            <HomepageTile @click="router.push('/contact')" class="HomepageTile col-span-6 lg:col-span-3 lg:row-span-3 secondary-tile">
                 <h2>Contact</h2>
                 <p>Let's connect and collaborate</p>
             </HomepageTile>
@@ -63,9 +63,6 @@ const router = useRouter()
 const isOverlayVisible = ref(false)
 const overlayContent = ref('')
 
-// definePageMeta({
-//     layout: 'home'
-// })
 
 function openOverlay(content) {
     router.push({ name: '/' + content })
@@ -92,44 +89,23 @@ console.log('leave')
     const tiles = document.querySelectorAll('.HomepageTile')
 
     exitAnimation(tiles,next)
-    // // const tl = gsap.timeline()
 
-    // tiles.forEach((tile, index) => {
-    //     // Generate random x and y values for entry direction
-    //     const x = Math.random() > 0.5 ? 100 : -100
-    //     const y = Math.random() > 0.5 ? 50 : -50
-
-    //     tl.fromTo(tile,
-    //         { opacity: 1, x: 0, y: 0, scale: 1, filter: "blur(0px)" },
-    //         { opacity: 0, x, y, scale: 0.9, filter: "blur(10px)", display: 'flex', visibility: 'visible', delay: 1, duration: index == 0 ? .5 : 0.3, delay: -.0005, ease: 'power3.in', }).then(() => {
-    //             next()
-    //         })
-    // })
-    // gsap.set(tiles, { display: 'none' }) // Set initial visibility to hidden
 })
 
 onMounted(() => {
+    const tiles = document.querySelectorAll('.HomepageTile');
+    
+    // Set tiles to invisible before animation starts
+    gsap.set(tiles, { opacity: 0 });
 
-    // tl = gsap.timeline(); //create the timeline
+    enterAnimation(
+        tiles, 
+        function(index) { return index == 1 ? 1 : 0.1 }, 
+        'power3.in', 
+        false
+    );
+});
 
-
-    const tiles = document.querySelectorAll('.HomepageTile')
-    enterAnimation(tiles,function(index){return index == 1 ? 1 : 0.1},'power3.in', false)
-
-    // gsap.set(tiles, { display: 'none' }) // Set initial visibility to hidden
-
-    // const tl = gsap.timeline()
-
-    // tiles.forEach((tile, index) => {
-    //     // Generate random x and y values for entry direction
-    //     const x = Math.random() > 0.5 ? 100 : -100
-    //     const y = Math.random() > 0.5 ? 50 : -50
-
-    //     tl.fromTo(tile,
-    //         { opacity: 0, x, y, scale: 0.9, filter: "blur(10px)", display: 'flex', visibility: 'visible', delay: 1 },
-    //         { opacity: 1, x: 0, y: 0, scale: 1, filter: "blur(0px)", duration: index == 0 ? .5 : 0.3, delay: -.0005, ease: 'power3.in' })
-    // })
-})
 </script>
 
 <style>
@@ -138,14 +114,10 @@ body,
 label {
     font-family: 'Roboto', sans-serif;
 }
-
-/* 
-.glass-tile {
-    @apply h-full w-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-[6px] bg-opacity-[.2] p-5 flex items-center text-xl box-border font-light hover:bg-opacity-5 outline-gray-100/50 hover:cursor-pointer 
-    hover:shadow hover:shadow-gray-50/20 transition-all
-    max-md:mt-2;
-    transition-duration: .3s;
-} */
+.HomepageTile {
+    opacity: 0; /* Ensure it's invisible before animation */
+    visibility: hidden; /* Prevents it from occupying space */
+}
 .HomepageTile {
     @apply hover:scale-[1.5]
 }

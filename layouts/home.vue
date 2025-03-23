@@ -45,7 +45,7 @@ const displayComputed = computed(() => {
 }
 
 .vr-content-1 {
-  transform-style: flat;
+  transform-style: preserve-3d;
   transform: rotateX(5deg);
 }
   </style>

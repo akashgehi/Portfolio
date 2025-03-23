@@ -17,6 +17,6 @@
         outline-gray-100/50
     }
     .glass-3{
-        @apply bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border-b border-white border-opacity-20 py-4
+        @apply bg-gray-300 bg-opacity-10 backdrop-filter backdrop-blur-lg border-b border-white border-opacity-20 py-4
     }
 </style>

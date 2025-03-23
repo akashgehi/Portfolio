@@ -87,7 +87,7 @@ watch(route, () => {
 }
 
 .glass-vr-bg {
-    @apply bg-gray-500 bg-opacity-10 backdrop-filter backdrop-blur-lg border border-white border-opacity-20 p-4 md:p-6 lg:p-8 xl:p-12;
+    @apply bg-gray-600 bg-opacity-10 backdrop-filter backdrop-blur-lg border border-white border-opacity-20 p-4 md:p-6 lg:p-8 xl:p-12;
 }
 
 .scroll::-webkit-scrollbar {
