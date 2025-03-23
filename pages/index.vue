@@ -83,14 +83,13 @@ let tl = ref(null)
 // const transitionWrapper = ref(null);
 
 onBeforeRouteLeave((to, from, next) => {
-    tl = gsap.timeline(); //create the timeline
-console.log('leave')
+    const tiles = document.querySelectorAll('.HomepageTile');
 
-    const tiles = document.querySelectorAll('.HomepageTile')
+    // Reset tiles' opacity so they animate properly when coming back
+    gsap.set(tiles, { opacity: 1, visibility: 'visible' });
 
-    exitAnimation(tiles,next)
-
-})
+    exitAnimation(tiles, next);
+});
 
 onMounted(() => {
     const tiles = document.querySelectorAll('.HomepageTile');
@@ -115,9 +114,11 @@ label {
     font-family: 'Roboto', sans-serif;
 }
 .HomepageTile {
-    opacity: 0; /* Ensure it's invisible before animation */
-    visibility: hidden; /* Prevents it from occupying space */
+    opacity: 0; /* Initial state */
+    visibility: hidden; /* Prevents flashing */
+    will-change: opacity, transform; /* Helps retain rendering */
 }
+
 .HomepageTile {
     @apply hover:scale-[1.5]
 }

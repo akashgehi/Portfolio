@@ -17,7 +17,7 @@
 
             <!-- Main Content (Takes Remaining Space) -->
             <div 
-                class="w-full lg:h-full lg:!max-h-[1200px] flex-grow rounded-[10px] md:rounded-[20px] vr-frame flex  justify-center overflow-auto scroll"
+                class="w-full lg:h-full lg:!max-h-[1200px] flex-grow rounded-[10px] md:rounded-[20px] vr-frame flex justify-center "
                 :class="{ 'glass-vr-bg': route.path !== '/' }"
             >
                 <div ref="windowRef" class="relative w-full h-full flex items-center justify-center">
@@ -34,35 +34,48 @@ import { useRoute } from 'vue-router';
 import { useNuxtApp } from '#app';
 
 const { $gsap: gsap } = useNuxtApp();
-
 const route = useRoute();
 const navbar = ref(null);
 const windowRef = ref(null);
 
+// Prevent stacked animations and opacity issues
 const animateElements = () => {
     if (windowRef.value) {
-        gsap.from(windowRef.value, {
-            duration: 1,
-            opacity: 0,
-            y: 50,
-            ease: "power3.out"
-        });
+        gsap.killTweensOf(windowRef.value); // Stop any ongoing animations
+        gsap.set(windowRef.value, { opacity: 1 }); // Ensure full opacity before starting
+        
+        gsap.fromTo(
+            windowRef.value,
+            { opacity: 0, y: 50 },
+            { 
+                duration: 1, 
+                opacity: 1, 
+                y: 0, 
+                ease: "power3.out",
+                onComplete: () =>{ 
+                    document.querySelector('.vr-frame').classList.add('overflow-auto')
+                    gsap.set(windowRef.value, { clearProps: "opacity" })} // Reset styles
+            }
+        );
+    }
 
-        if (navbar.value?.$el?.childNodes[1]) {
-            gsap.utils.toArray(navbar.value.$el.childNodes[1].childNodes).forEach((child, i) => {
-                gsap.fromTo(child, {
-                    opacity: 0,
-                    scale: 0.5,
-                }, {
-                    duration: 0.2,
-                    opacity: 1,
-                    scale: 1,
-                    delay: i * 0.1,
-                    ease: "back.out",
-                    stagger: 0.1
-                });
-            });
-        }
+    if (navbar.value?.$el?.childNodes[1]) {
+        const children = gsap.utils.toArray(navbar.value.$el.childNodes[1].childNodes);
+
+        gsap.killTweensOf(children); // Prevent animation stacking
+        gsap.set(children, { opacity: 1 }); // Ensure full opacity
+        
+        gsap.fromTo(
+            children,
+            { opacity: 0, scale: 0.5 },
+            {
+                duration: 0.2,
+                opacity: 1,
+                scale: 1,
+                ease: "back.out",
+                stagger: 0.1
+            }
+        );
     }
 };
 
@@ -71,6 +84,7 @@ onMounted(() => {
 });
 
 watch(route, () => {
+    gsap.set(windowRef.value, { opacity: 1 }); // Reset opacity before animation
     animateElements();
 });
 </script>
@@ -87,7 +101,7 @@ watch(route, () => {
 }
 
 .glass-vr-bg {
-    @apply bg-gray-600 bg-opacity-10 backdrop-filter backdrop-blur-lg border border-white border-opacity-20 p-4 md:p-6 lg:p-8 xl:p-12;
+    @apply bg-gray-600 bg-opacity-10 backdrop-filter backdrop-blur-lg border border-white border-opacity-20 p-4 md:p-6 lg:p-8 xl:p-12 overflow-auto;
 }
 
 .scroll::-webkit-scrollbar {
@@ -96,32 +110,32 @@ watch(route, () => {
 
 /* Apply to the entire document */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+    width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1); /* Light frosted background */
-  backdrop-filter: blur(10px);
-  border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3); /* Glassmorphic effect */
-  border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease-in-out;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease-in-out;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.5); /* Brighter on hover */
-  border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 /* For Firefox */
 * {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
 }
 
 video#myVideo {
